@@ -38,13 +38,10 @@ elseif (VTK_USE_COCOA)
     vtkCocoaRenderWindowInteractor.h)
   list(APPEND nowrap_headers
     vtkCocoaMacOSXSDKCompatibility.h)
-  # Set specified Objective-C++ flags, if any.
-  if (VTK_REQUIRED_OBJCXX_FLAGS)
-    set_source_files_properties(
-      vtkCocoaRenderWindowInteractor.mm
-      PROPERTIES
-        COMPILE_FLAGS "${VTK_REQUIRED_OBJCXX_FLAGS}")
-  endif ()
+  set_source_files_properties(
+    vtkCocoaRenderWindowInteractor.mm
+    PROPERTIES
+      LANGUAGE OBJCXX)
 elseif (ANDROID)
   # Add some custom overrides
   vtk_object_factory_declare(
@@ -52,20 +49,17 @@ elseif (ANDROID)
     OVERRIDE vtkAndroidRenderWindowInteractor)
   list(APPEND classes vtkAndroidRenderWindowInteractor)
   include_directories("${CMAKE_ANDROID_NDK}/sources/android/native_app_glue")
-elseif (APPLE_IOS)
+elseif (VTK_APPLE_IOS)
   # Add some custom overrides
   vtk_object_factory_declare(
     BASE vtkRenderWindowInteractor
     OVERRIDE vtkIOSRenderWindowInteractor)
   list(APPEND sources vtkIOSRenderWindowInteractor.mm)
   list(APPEND headers vtkIOSRenderWindowInteractor.h)
-  # Set specified Objective-C++ flags, if any.
-  if (VTK_REQUIRED_OBJCXX_FLAGS)
-    set_source_files_properties(
-      vtkIOSRenderWindowInteractor.mm
-      PROPERTIES
-        COMPILE_FLAGS "${VTK_REQUIRED_OBJCXX_FLAGS}")
-  endif ()
+  set_source_files_properties(
+    vtkIOSRenderWindowInteractor.mm
+    PROPERTIES
+      LANGUAGE OBJCXX)
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   # Add some custom overrides
   vtk_object_factory_declare(
@@ -124,7 +118,7 @@ if (ANDROID)
       android)
 endif ()
 
-if (APPLE_IOS)
+if (VTK_APPLE_IOS)
   vtk_module_link(VTK::RenderingUI PUBLIC "-framework UIKit")
 endif ()
 vtk_add_test_mangling(VTK::RenderingUI)

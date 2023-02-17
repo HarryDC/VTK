@@ -9,11 +9,11 @@ include(CMakeDependentOption)
 
 # For each platform specific API, we define VTK_USE_<API> options.
 cmake_dependent_option(VTK_USE_COCOA "Use Cocoa for VTK render windows" ON
-  "APPLE;NOT APPLE_IOS" OFF)
+  "APPLE;NOT VTK_APPLE_IOS" OFF)
 mark_as_advanced(VTK_USE_COCOA)
 
 set(default_use_x OFF)
-if(UNIX AND NOT ANDROID AND NOT APPLE AND NOT APPLE_IOS AND NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+if(UNIX AND NOT ANDROID AND NOT APPLE AND NOT VTK_APPLE_IOS AND NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   set(default_use_x ON)
 endif()
 option(VTK_USE_X "Use X for VTK render windows" "${default_use_x}")
@@ -93,7 +93,7 @@ if (VTK_OPENGL_HAS_OSMESA OR VTK_OPENGL_HAS_EGL)
 endif ()
 
 # iOS does not use EGL
-if (APPLE_IOS)
+if (VTK_APPLE_IOS)
   set(vtk_can_do_offscreen TRUE)
   set(vtk_can_do_onscreen TRUE)
   set(vtk_can_do_headless FALSE)

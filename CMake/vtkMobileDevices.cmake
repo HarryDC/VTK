@@ -1,14 +1,10 @@
 # some specific defaults for Android to give folks
 # a reasonable starting point
-if (ANDROID OR APPLE_IOS)
-  set(VTK_REQUIRE_LARGE_FILE_SUPPORT 2 CACHE STRING "Result from TRY_RUN" FORCE)
-  set(VTK_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT "" CACHE STRING "Output from TRY_RUN" FORCE)
-  set(XDMF_REQUIRE_LARGE_FILE_SUPPORT 2 CACHE STRING "Result from TRY_RUN" FORCE)
-  set(XDMF_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT "" CACHE STRING "Output from TRY_RUN" FORCE)
+if (ANDROID OR VTK_APPLE_IOS)
   set(KWSYS_LFS_WORKS 2 CACHE STRING "Result from TRY_RUN" FORCE)
   set(KWSYS_LFS_WORKS__TRYRUN_OUTPUT "" CACHE STRING "Output from TRY_RUN" FORCE)
 
-  if (APPLE_IOS)
+  if (VTK_APPLE_IOS)
     unset(OPENGL_INCLUDE_DIR CACHE)
     find_path(OPENGL_INCLUDE_DIR ES3/gl.h
               ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/OpenGLES.framework/Headers

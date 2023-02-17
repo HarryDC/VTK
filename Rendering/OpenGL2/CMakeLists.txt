@@ -322,14 +322,11 @@ elseif (VTK_USE_COCOA)
     vtkCocoaRenderWindow.h)
   list(APPEND nowrap_headers
     vtkCocoaGLView.h)
-  # Set specified Objective-C++ flags, if any.
-  if (VTK_REQUIRED_OBJCXX_FLAGS)
-    set_source_files_properties(
-      vtkCocoaRenderWindow.mm
-      vtkCocoaGLView.mm
-      PROPERTIES
-        COMPILE_FLAGS "${VTK_REQUIRED_OBJCXX_FLAGS}")
-  endif ()
+  set_source_files_properties(
+    vtkCocoaRenderWindow.mm
+    vtkCocoaGLView.mm
+    PROPERTIES
+      LANGUAGE OBJCXX)
 elseif (ANDROID)
   # Add some custom overrides
   vtk_object_factory_declare(
@@ -343,7 +340,7 @@ elseif (EMSCRIPTEN)
     BASE vtkRenderWindow
     OVERRIDE vtkSDL2OpenGLRenderWindow)
   set(has_vtkRenderWindow_override 1)
-elseif (APPLE_IOS)
+elseif (VTK_APPLE_IOS)
   # Add some custom overrides
   vtk_object_factory_declare(
     BASE vtkRenderWindow
@@ -351,13 +348,10 @@ elseif (APPLE_IOS)
   set(has_vtkRenderWindow_override 1)
   list(APPEND sources vtkIOSRenderWindow.mm)
   list(APPEND headers vtkIOSRenderWindow.h)
-  # Set specified Objective-C++ flags, if any.
-  if (VTK_REQUIRED_OBJCXX_FLAGS)
-    set_source_files_properties(
-      vtkIOSRenderWindow.mm
-      PROPERTIES
-        COMPILE_FLAGS "${VTK_REQUIRED_OBJCXX_FLAGS}")
-  endif ()
+  set_source_files_properties(
+    vtkIOSRenderWindow.mm
+    PROPERTIES
+      LANGUAGE OBJCXX)
 endif ()
 
 if (VTK_DEFAULT_RENDER_WINDOW_HEADLESS OR NOT has_vtkRenderWindow_override)
@@ -460,12 +454,13 @@ if (ANDROID)
       android)
 endif ()
 
-if (APPLE_IOS)
+if (VTK_APPLE_IOS)
   vtk_module_link(VTK::RenderingOpenGL2 PUBLIC "-framework UIKit")
 endif ()
 
 if (NOT ANDROID AND
-    NOT APPLE_IOS AND
+    NOT VTK_APPLE_IOS AND
+    NOT VTK_FRAMEWORK_BUILD AND
     NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten" AND
     NOT VTK_OPENGL_USE_GLES)
   set(probe_no_install)

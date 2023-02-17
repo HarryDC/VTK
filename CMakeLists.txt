@@ -13,10 +13,6 @@ endif ()
 set(vtk_cmake_dir "${VTK_SOURCE_DIR}/CMake")
 list(INSERT CMAKE_MODULE_PATH 0 "${vtk_cmake_dir}")
 
-if (APPLE)
-  include(vtkApple)
-endif ()
-
 # must be before the following iOS / Android
 find_package(Git QUIET)
 include(VTKDetermineVersion)
@@ -25,12 +21,10 @@ set(VTK_VERSION
     "${VTK_MAJOR_VERSION}.${VTK_MINOR_VERSION}.${VTK_BUILD_VERSION}")
 determine_version("${CMAKE_CURRENT_SOURCE_DIR}" "${GIT_EXECUTABLE}" "VTK")
 
-option(VTK_IOS_BUILD "Build vtk.framework for iOS" OFF)
-mark_as_advanced(VTK_IOS_BUILD)
-if (VTK_IOS_BUILD)
-  include(vtkiOS)
-  return()
-endif()
+option(VTK_FRAMEWORK_BUILD "Install vtk.framework for apple targets." OFF)
+if (APPLE)
+  include(vtkApple)
+endif ()
 
 option(VTK_ANDROID_BUILD "Build VTK for Android" OFF)
 mark_as_advanced(VTK_ANDROID_BUILD)
@@ -126,12 +120,20 @@ if (VTK_ENABLE_REMOTE_MODULES)
 endif ()
 
 #-----------------------------------------------------------------------------
-# Does VTK require support for 64 bit file systems
-include(CheckCXXSourceRuns)
-file(READ "${vtk_cmake_dir}/vtkRequireLargeFilesSupport.cxx"
-  VTK_REQUIRE_LARGE_FILE_SUPPORT_FILE)
-check_cxx_source_runs("${VTK_REQUIRE_LARGE_FILE_SUPPORT_FILE}"
-  VTK_REQUIRE_LARGE_FILE_SUPPORT)
+# Does VTK require support for 64 bit file systems?  Disabled for mobile,
+# as well as macOS vtk.framework builds (which may be cross compiling).
+if (NOT ANDROID AND NOT VTK_APPLE_IOS AND NOT VTK_FRAMEWORK_BUILD)
+  include(CheckCXXSourceRuns)
+  file(READ "${vtk_cmake_dir}/vtkRequireLargeFilesSupport.cxx"
+    VTK_REQUIRE_LARGE_FILE_SUPPORT_FILE)
+  check_cxx_source_runs("${VTK_REQUIRE_LARGE_FILE_SUPPORT_FILE}"
+    VTK_REQUIRE_LARGE_FILE_SUPPORT)
+else()
+  set(VTK_REQUIRE_LARGE_FILE_SUPPORT 2 CACHE STRING "Result from TRY_RUN" FORCE)
+  set(VTK_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT "" CACHE STRING "Output from TRY_RUN" FORCE)
+  set(XDMF_REQUIRE_LARGE_FILE_SUPPORT 2 CACHE STRING "Result from TRY_RUN" FORCE)
+  set(XDMF_REQUIRE_LARGE_FILE_SUPPORT__TRYRUN_OUTPUT "" CACHE STRING "Output from TRY_RUN" FORCE)
+endif()
 
 #-----------------------------------------------------------------------------
 # Provide compatibility options.
@@ -496,12 +498,21 @@ if (VTK_WHEEL_BUILD)
   set(vtk_library_version_info)
 endif ()
 
+# NOTE: for vtk.framework, headers must go to vtk.framework/Headers/*.h, not
+# vtk.framework/Headers/vtk/*.h.
+if (VTK_FRAMEWORK_BUILD)
+  set(vtk_header_destination "${CMAKE_INSTALL_INCLUDEDIR}")
+else()
+  set(vtk_header_destination
+    "${CMAKE_INSTALL_INCLUDEDIR}/vtk${vtk_version_suffix}")
+endif()
+
 vtk_module_build(
   MODULES             ${vtk_modules}
   KITS                ${vtk_kits}
   INSTALL_EXPORT      "${vtk_install_export}"
   ${vtk_target_package}
-  HEADERS_DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/vtk${vtk_version_suffix}"
+  HEADERS_DESTINATION "${vtk_header_destination}"
   ${vtk_hierarchy_destination_args}
   CMAKE_DESTINATION   "${vtk_cmake_destination}"
   LICENSE_DESTINATION "${CMAKE_INSTALL_LICENSEDIR}"
@@ -718,3 +729,8 @@ configure_file(
 #-----------------------------------------------------------------------------
 # Do this at the end so the all variables it uses are setup.
 include(vtkBuildPath)
+
+# This must be done after *all* targets have been configured.
+if (VTK_FRAMEWORK_BUILD)
+  include(vtkFrameworkFinalize)
+endif()

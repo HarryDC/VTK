@@ -89,6 +89,13 @@ VTK_ABI_NAMESPACE_END
 #define DEBUG3CheckFrameBufferStatusMacro(mode) vtkStaticCheckFrameBufferStatusMacro(mode)
 #endif
 
+// support iOS builds
+#ifndef GL_ES_VERSION_3_0 // see vtkTextureObject.h
+#define vtk_default_clamp vtkTextureObject::ClampToBorder
+#else
+#define vtk_default_clamp vtkTextureObject::ClampToEdge
+#endif
+
 /// vtkLICPingPongBufferManager -- gpgpu buffer manager
 /**
 Helper that manages state for the ping-pong buffer strategy
@@ -549,7 +556,7 @@ public:
   {
     float border[4] = { 0.0f, 1.0f, 0.0f, 0.0f };
     return this->AllocateBuffer(
-      context, texSize, vtkTextureObject::Nearest, vtkTextureObject::ClampToBorder, border);
+      context, texSize, vtkTextureObject::Nearest, vtk_default_clamp, border);
   }
 
   // Description:
@@ -569,7 +576,7 @@ public:
   {
     float border[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
     return this->AllocateBuffer(
-      context, texSize, vtkTextureObject::Linear, vtkTextureObject::ClampToBorder, border);
+      context, texSize, vtkTextureObject::Linear, vtk_default_clamp, border);
   }
 
   // Description:
@@ -987,8 +994,8 @@ void vtkLineIntegralConvolution2D::SetVectorTexParameters(vtkTextureObject* tex)
 {
   tex->SetBaseLevel(0);
   tex->SetMaxLevel(0);
-  tex->SetWrapS(vtkTextureObject::ClampToBorder);
-  tex->SetWrapT(vtkTextureObject::ClampToBorder);
+  tex->SetWrapS(vtk_default_clamp);
+  tex->SetWrapT(vtk_default_clamp);
   tex->SetBorderColor(0.0, 0.0, 0.0, 0.0);
   tex->SetMinificationFilter(vtkTextureObject::Linear);
   tex->SetMagnificationFilter(vtkTextureObject::Linear);
@@ -1906,4 +1913,5 @@ void vtkLineIntegralConvolution2D::PrintSelf(ostream& os, vtkIndent indent)
     << indent << "NormalizeVectors=" << this->NormalizeVectors << endl
     << indent << "ComponentIds=" << this->ComponentIds[0] << ", " << this->ComponentIds[1] << endl;
 }
+#undef vtk_default_clamp
 VTK_ABI_NAMESPACE_END

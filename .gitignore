@@ -20,3 +20,6 @@ xcuserdata
 # Exclude Visual Studio stuff
 .vs*
 CMakeSettings.json
+
+# Utilities/build_xcframework.py by default builds / installs here.
+xcframework/

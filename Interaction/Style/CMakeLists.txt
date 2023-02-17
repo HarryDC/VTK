@@ -19,7 +19,7 @@ set(classes
   vtkInteractorStyleSwitch
   vtkParallelCoordinatesInteractorStyle)
 
-if (ANDROID OR APPLE_IOS)
+if (ANDROID OR VTK_APPLE_IOS)
   set(style_override "vtkInteractorStyleMultiTouchCamera")
 else ()
   set(style_override "vtkInteractorStyleSwitch")

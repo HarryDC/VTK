@@ -33,7 +33,7 @@ endif ()
 
 if (ANDROID)
   #add_example(Android)
-elseif (APPLE_IOS)
+elseif (VTK_APPLE_IOS)
   #add_example(iOS)
 elseif (EMSCRIPTEN)
   if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
