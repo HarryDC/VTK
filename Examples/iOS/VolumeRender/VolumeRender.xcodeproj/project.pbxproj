@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,9 +16,9 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		225248071A2E3FDB009B03BD /* vtk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225248061A2E3FDB009B03BD /* vtk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		710EFBDE2A1812000054F995 /* vtk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710EFBDD2A1811FF0054F995 /* vtk.xcframework */; };
 		AF877F9417272C2F002D08B8 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF877F9317272C2F002D08B8 /* GLKit.framework */; };
 		AFCEBA2511D96215001AA22A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCEBA1E11D96215001AA22A /* Icon.png */; };
 		AFCEBA2711D96215001AA22A /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = AFCEBA2011D96215001AA22A /* iTunesArtwork */; };
@@ -39,6 +39,7 @@
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		710EFBDD2A1811FF0054F995 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* VolumeRender-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "VolumeRender-Info.plist"; sourceTree = "<group>"; };
 		AF877F9317272C2F002D08B8 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		AFCEBA1E11D96215001AA22A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Images/Icon.png; sourceTree = "<group>"; };
@@ -54,10 +55,10 @@
 			files = (
 				AF877F9417272C2F002D08B8 /* GLKit.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				710EFBDE2A1812000054F995 /* vtk.xcframework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				1D3623EC0D0F72F000981E51 /* CoreGraphics.framework in Frameworks */,
 				2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */,
-				225248071A2E3FDB009B03BD /* vtk.framework in Frameworks */,
 				2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +111,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				710EFBDD2A1811FF0054F995 /* vtk.xcframework */,
 				225248061A2E3FDB009B03BD /* vtk.framework */,
 				AF877F9317272C2F002D08B8 /* GLKit.framework */,
 				1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */,
@@ -237,6 +239,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -250,13 +253,14 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/frameworks/vtk.framework/Headers,
+					../../../xcframework/install/iPhoneOS/vtk.framework/Headers,
 				);
 				INFOPLIST_FILE = "VolumeRender-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VolumeRender;
@@ -264,7 +268,7 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "arm64 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -276,6 +280,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -287,13 +292,14 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/frameworks/vtk.framework/Headers,
+					../../../xcframework/install/iPhoneOS/vtk.framework/Headers,
 				);
 				INFOPLIST_FILE = "VolumeRender-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VolumeRender;
@@ -301,7 +307,7 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "arm64 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

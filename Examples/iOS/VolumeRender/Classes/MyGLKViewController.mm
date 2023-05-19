@@ -4,7 +4,6 @@
 #import "MyGLKViewController.h"
 #include "vtk/vtkIOSRenderWindow.h"
 #include "vtk/vtkIOSRenderWindowInteractor.h"
-#include "vtk/vtkRenderingOpenGL2ObjectFactory.h"
 
 #include "vtk/vtkNew.h"
 
@@ -83,9 +82,6 @@
 
 - (void)setupPipeline
 {
-  // Register GL2 objects
-  vtkObjectFactory::RegisterFactory(vtkRenderingOpenGL2ObjectFactory::New());
-
   vtkIOSRenderWindow* renWin = vtkIOSRenderWindow::New();
   // renWin->DebugOn();
   [self setVTKRenderWindow:renWin];
@@ -103,17 +99,15 @@
 
   vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
 
-#if 0
-    vtkNew<vtkRTAnalyticSource> wavelet;
-    wavelet->SetWholeExtent(-127, 128,
-                            -127, 128,
-                            -127, 128);
-    wavelet->SetCenter(0.0, 0.0, 0.0);
+#if 1
+  vtkNew<vtkRTAnalyticSource> wavelet;
+  wavelet->SetWholeExtent(-127, 128, -127, 128, -127, 128);
+  wavelet->SetCenter(0.0, 0.0, 0.0);
 
-    vtkNew<vtkImageCast> ic;
-    ic->SetInputConnection(wavelet->GetOutputPort());
-    ic->SetOutputScalarTypeToUnsignedChar();
-    volumeMapper->SetInputConnection(ic->GetOutputPort());
+  vtkNew<vtkImageCast> ic;
+  ic->SetInputConnection(wavelet->GetOutputPort());
+  ic->SetOutputScalarTypeToUnsignedChar();
+  volumeMapper->SetInputConnection(ic->GetOutputPort());
 #else
   NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString* basePath = paths.firstObject;
