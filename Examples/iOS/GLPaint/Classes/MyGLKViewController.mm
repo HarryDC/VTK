@@ -4,7 +4,6 @@
 #import "MyGLKViewController.h"
 #import "vtkIOSRenderWindow.h"
 #import "vtkIOSRenderWindowInteractor.h"
-#include "vtkRenderingOpenGL2ObjectFactory.h"
 
 #include "vtkActor.h"
 #include "vtkCamera.h"
@@ -60,9 +59,6 @@
 
 - (void)setupPipeline
 {
-  vtkRenderingOpenGL2ObjectFactory* of = vtkRenderingOpenGL2ObjectFactory::New();
-  vtkObjectFactory::RegisterFactory(of);
-
   vtkIOSRenderWindow* renWin = vtkIOSRenderWindow::New();
   // renWin->DebugOn();
   [self setVTKRenderWindow:renWin];
