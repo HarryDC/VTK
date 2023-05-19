@@ -2,30 +2,30 @@
 // SPDX-License-Identifier: BSD-3-Clause
 #import "VTKViewController.h"
 
-#import <vtk/vtkActor.h>
-#import <vtk/vtkAutoInit.h>
-#import <vtk/vtkCamera.h>
-#import <vtk/vtkCommand.h>
-#import <vtk/vtkDebugLeaks.h>
-#import <vtk/vtkIOSRenderWindow.h>
-#import <vtk/vtkIOSRenderWindowInteractor.h>
-#import <vtk/vtkImageData.h>
-#import <vtk/vtkInteractorStyleMultiTouchCamera.h>
-#import <vtk/vtkNew.h>
-#import <vtk/vtkOpenGLState.h>
-#import <vtk/vtkOutlineFilter.h>
-#import <vtk/vtkPlaneWidget.h>
-#import <vtk/vtkPolyData.h>
-#import <vtk/vtkPolyDataMapper.h>
-#import <vtk/vtkProbeFilter.h>
-#import <vtk/vtkRTAnalyticSource.h>
-#import <vtk/vtkRenderer.h>
-#import <vtk/vtkStructuredGridOutlineFilter.h>
-#import <vtk/vtkUnstructuredGrid.h>
-#import <vtk/vtkXMLImageDataReader.h>
-#import <vtk/vtkXMLRectilinearGridReader.h>
-#import <vtk/vtkXMLStructuredGridReader.h>
-#import <vtk/vtkXMLUnstructuredGridReader.h>
+#import <vtkActor.h>
+#import <vtkAutoInit.h>
+#import <vtkCamera.h>
+#import <vtkCommand.h>
+#import <vtkDebugLeaks.h>
+#import <vtkIOSRenderWindow.h>
+#import <vtkIOSRenderWindowInteractor.h>
+#import <vtkImageData.h>
+#import <vtkInteractorStyleMultiTouchCamera.h>
+#import <vtkNew.h>
+#import <vtkOpenGLState.h>
+#import <vtkOutlineFilter.h>
+#import <vtkPlaneWidget.h>
+#import <vtkPolyData.h>
+#import <vtkPolyDataMapper.h>
+#import <vtkProbeFilter.h>
+#import <vtkRTAnalyticSource.h>
+#import <vtkRenderer.h>
+#import <vtkStructuredGridOutlineFilter.h>
+#import <vtkUnstructuredGrid.h>
+#import <vtkXMLImageDataReader.h>
+#import <vtkXMLRectilinearGridReader.h>
+#import <vtkXMLStructuredGridReader.h>
+#import <vtkXMLUnstructuredGridReader.h>
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 

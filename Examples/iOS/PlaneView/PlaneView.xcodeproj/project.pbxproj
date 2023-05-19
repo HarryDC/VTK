@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,10 +13,10 @@
 		1312F94A1C65005D0064AA4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1312F9481C65005D0064AA4C /* Main.storyboard */; };
 		1312F94C1C65005D0064AA4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1312F94B1C65005D0064AA4C /* Assets.xcassets */; };
 		1312F94F1C65005D0064AA4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1312F94D1C65005D0064AA4C /* LaunchScreen.storyboard */; };
-		1312F9571C6502270064AA4C /* vtk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1312F9561C6502270064AA4C /* vtk.framework */; };
 		1312F9591C6503EC0064AA4C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1312F9581C6503EC0064AA4C /* GLKit.framework */; };
 		1312F95F1C650B050064AA4C /* SettingsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1312F95E1C650B050064AA4C /* SettingsTableViewController.mm */; };
 		135BC9A11C777D12009C8169 /* iOSapplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = 135BC9A01C777D12009C8169 /* iOSapplication.icns */; };
+		710EFBE32A1814990054F995 /* vtk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710EFBE22A1814990054F995 /* vtk.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +36,7 @@
 		1312F95E1C650B050064AA4C /* SettingsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsTableViewController.mm; sourceTree = "<group>"; };
 		1312F9631C68EADF0064AA4C /* PlaneView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PlaneView.entitlements; sourceTree = "<group>"; };
 		135BC9A01C777D12009C8169 /* iOSapplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iOSapplication.icns; sourceTree = "<group>"; };
+		710EFBE22A1814990054F995 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1312F9591C6503EC0064AA4C /* GLKit.framework in Frameworks */,
-				1312F9571C6502270064AA4C /* vtk.framework in Frameworks */,
+				710EFBE32A1814990054F995 /* vtk.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +59,7 @@
 				1312F9561C6502270064AA4C /* vtk.framework */,
 				1312F93A1C65005D0064AA4C /* PlaneView */,
 				1312F9391C65005D0064AA4C /* Products */,
+				710EFBE12A1814980054F995 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +99,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		710EFBE12A1814980054F995 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				710EFBE22A1814990054F995 /* vtk.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,7 +141,6 @@
 				TargetAttributes = {
 					1312F9371C65005D0064AA4C = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = W38PE5Y733;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -319,17 +328,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_ENTITLEMENTS = PlaneView/PlaneView.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/frameworks,
-				);
-				HEADER_SEARCH_PATHS = /usr/local/frameworks/vtk.framework/Headers;
+				DEVELOPMENT_TEAM = W38PE5Y733;
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
+				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = PlaneView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kitware.com.PlaneView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -340,17 +351,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_ENTITLEMENTS = PlaneView/PlaneView.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/frameworks,
-				);
-				HEADER_SEARCH_PATHS = /usr/local/frameworks/vtk.framework/Headers;
+				DEVELOPMENT_TEAM = W38PE5Y733;
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
+				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = PlaneView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kitware.com.PlaneView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
