@@ -4,7 +4,6 @@
 #import "MyGLKViewController.h"
 #import "vtkIOSRenderWindow.h"
 #import "vtkIOSRenderWindowInteractor.h"
-#include "vtkRenderingOpenGL2ObjectFactory.h"
 
 #include "vtkParametricBoy.h"
 #include "vtkParametricConicSpiral.h"
@@ -131,9 +130,6 @@
 
 - (void)setupPipeline
 {
-  // Register GL2 objects
-  vtkObjectFactory::RegisterFactory(vtkRenderingOpenGL2ObjectFactory::New());
-
   //
   // Create the parametric objects
   //
