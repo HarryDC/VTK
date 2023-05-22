@@ -12,7 +12,6 @@
 #include "vtkInteractorStyleMultiTouchCamera.h"
 #include "vtkRenderer.h"
 #include "vtkRendererCollection.h"
-#include "vtkRenderingOpenGL2ObjectFactory.h"
 
 @interface VTKView ()
 
@@ -60,9 +59,6 @@
 
 - (void)initializeVTK
 {
-  // Register VTK GL2 objects
-  vtkObjectFactory::RegisterFactory(vtkRenderingOpenGL2ObjectFactory::New());
-
   // GL ES 3.0 is required for this app
   self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
   if (!self.context)

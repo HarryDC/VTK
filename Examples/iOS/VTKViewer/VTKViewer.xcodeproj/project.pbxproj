@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,13 +14,13 @@
 		12BFB1101EF834F100EE3EE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12BFB10E1EF834F100EE3EE1 /* LaunchScreen.storyboard */; };
 		12BFB11B1EF834F100EE3EE1 /* VTKViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BFB11A1EF834F100EE3EE1 /* VTKViewerTests.m */; };
 		12BFB1261EF834F100EE3EE1 /* VTKViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BFB1251EF834F100EE3EE1 /* VTKViewerUITests.m */; };
-		12BFB1351EF8363E00EE3EE1 /* vtk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12BFB1341EF8363E00EE3EE1 /* vtk.framework */; };
 		12BFB13A1EF83D2000EE3EE1 /* VTKView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 12BFB1391EF83D2000EE3EE1 /* VTKView.mm */; };
 		12BFB13C1EF83DDB00EE3EE1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12BFB13B1EF83DDB00EE3EE1 /* GLKit.framework */; };
 		1A1AB77D1FBE4F300096A0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AB77C1FBE4F300096A0DB /* AppDelegate.swift */; };
 		1A30DA401FBF7B9A00B5ACF2 /* VTKLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A30DA3F1FBF7B9A00B5ACF2 /* VTKLoader.mm */; };
 		4304BED41FC81FE000326FC2 /* VTKViewerDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304BED31FC81FE000326FC2 /* VTKViewerDocument.swift */; };
 		438EE6B11FD14BA4008682A3 /* ExampleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438EE6B01FD14BA4008682A3 /* ExampleDataManager.swift */; };
+		7150DCD12A18164A008B82E3 /* vtk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7150DCD02A181649008B82E3 /* vtk.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +66,7 @@
 		1A30DA3F1FBF7B9A00B5ACF2 /* VTKLoader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VTKLoader.mm; sourceTree = "<group>"; };
 		4304BED31FC81FE000326FC2 /* VTKViewerDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTKViewerDocument.swift; sourceTree = "<group>"; };
 		438EE6B01FD14BA4008682A3 /* ExampleDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDataManager.swift; sourceTree = "<group>"; };
+		7150DCD02A181649008B82E3 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12BFB13C1EF83DDB00EE3EE1 /* GLKit.framework in Frameworks */,
-				12BFB1351EF8363E00EE3EE1 /* vtk.framework in Frameworks */,
+				7150DCD12A18164A008B82E3 /* vtk.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +161,7 @@
 		12BFB1331EF8363E00EE3EE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7150DCD02A181649008B82E3 /* vtk.xcframework */,
 				12BFB13B1EF83DDB00EE3EE1 /* GLKit.framework */,
 				12BFB1341EF8363E00EE3EE1 /* vtk.framework */,
 			);
@@ -228,13 +230,14 @@
 		12BFB0F51EF834F100EE3EE1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1330;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Kitware, Inc.";
 				TargetAttributes = {
 					12BFB0FC1EF834F100EE3EE1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = W38PE5Y733;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = "";
 						ProvisioningStyle = Automatic;
 					};
 					12BFB1151EF834F100EE3EE1 = {
@@ -253,10 +256,9 @@
 			};
 			buildConfigurationList = 12BFB0F81EF834F100EE3EE1 /* Build configuration list for PBXProject "VTKViewer" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -415,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -467,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -481,21 +483,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Frameworks,
+					"../../../xcframework/install/**",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
+				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = VTKViewer/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VTKViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "VTKViewer/VTKViewer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = /usr/local/frameworks/vtk.framework/Headers;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -504,20 +512,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Frameworks,
+					"../../../xcframework/install/**",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
+				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = VTKViewer/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VTKViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "VTKViewer/VTKViewer-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = /usr/local/frameworks/vtk.framework/Headers;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -528,7 +542,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				INFOPLIST_FILE = VTKViewerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VTKViewerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VTKViewer.app/VTKViewer";
@@ -542,7 +561,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				INFOPLIST_FILE = VTKViewerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VTKViewerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VTKViewer.app/VTKViewer";
@@ -555,7 +579,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				INFOPLIST_FILE = VTKViewerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VTKViewerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = VTKViewer;
@@ -568,7 +596,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				INFOPLIST_FILE = VTKViewerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kitware.VTKViewerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = VTKViewer;

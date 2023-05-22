@@ -127,6 +127,7 @@ if (VTK_FRAMEWORK_BUILD)
     CommonColor
     CommonComputationalGeometry
     CommonExecutionModel
+    CommonImplicitArrays
     CommonMath
     CommonMisc
     CommonSystem
@@ -143,6 +144,7 @@ if (VTK_FRAMEWORK_BUILD)
     FiltersStatistics
     FiltersTexture # Required by InteractionWidgets
     FiltersHyperTree # Required by RenderingOpenGL2
+    FiltersVerdict
     ImagingColor
     ImagingCore
     ImagingFourier
@@ -159,6 +161,7 @@ if (VTK_FRAMEWORK_BUILD)
     InteractionWidgets
     IOCore
     IOImage  # Required by RenderingOpenGL2
+    IOGeometry
     IOLegacy  # Required by ParallelCore
     IOXML  # Required by ParallelCore
     IOXMLParser
@@ -191,7 +194,6 @@ if (VTK_FRAMEWORK_BUILD)
     CommonArchive
     CommonCore
     CommonDataModel
-    CommonImplicitArrays
     DomainsChemistry
     DomainsChemistryOpenGL2
     DomainsMicroscopy
@@ -218,7 +220,6 @@ if (VTK_FRAMEWORK_BUILD)
     FiltersSMP
     FiltersSelection
     FiltersTopology
-    FiltersVerdict
     GUISupportQt
     GUISupportQtQuick
     GUISupportQtSQL
@@ -247,7 +248,6 @@ if (VTK_FRAMEWORK_BUILD)
     IOFides
     IOGDAL
     IOGeoJSON
-    IOGeometry
     IOH5Rage
     IOH5part
     IOHDF
