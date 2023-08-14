@@ -409,6 +409,15 @@ if (VTK_BUILD_COMPILE_TOOLS_ONLY)
   set(vtk_kit_files)
 endif ()
 
+# TODO: add another file here to include for VTK_FRAMEWORK_BUILD modules to set
+# both vtk_requested_modules and vtk_rejected_modules.
+if (VTK_FRAMEWORK_BUILD)
+  set(vtk_requested_modules
+    VTK::RenderingOpenGL2)
+  set(vtk_rejected_modules
+    VTK::h5part)
+endif()
+
 cmake_dependent_option(VTK_INSTALL_SDK "Install SDK components" ON
   "NOT VTK_BUILD_COMPILE_TOOLS_ONLY" ON)
 mark_as_advanced(VTK_INSTALL_SDK)
