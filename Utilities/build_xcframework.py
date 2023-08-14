@@ -265,7 +265,9 @@ def main() -> None:
             "https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html"
         ),
     )
-    container = this_file_dir.parent / "xcframework"
+    # We are in Utilities/build_xcframework.py, by default we want to do an out of
+    # source build in a sibling directory to the vtk work tree.
+    container = this_file_dir.parent.parent / "vtk_xcframework"
     parser.add_argument(
         "-b",
         "--build-root",
