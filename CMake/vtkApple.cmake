@@ -120,12 +120,9 @@ if (VTK_FRAMEWORK_BUILD)
   # install tree will have CMAKE_INSTALL_PREFIX/lib and
   # CMAKE_INSTALL_PREFIX/vtk.framework, there is no way to prevent the `lib`
   # directory from being created.
-  set(CMAKE_INSTALL_INCLUDEDIR "vtk.framework/Headers"
-    CACHE STRING "Install header files to the framework.")
-  set(CMAKE_INSTALL_DATAROOTDIR "vtk.framework/Resources"
-    CACHE STRING "Install license files to the framework resources directory.")
-  set(CMAKE_INSTALL_BINDIR "vtk.framework/Resources/bin"
-    CACHE STRING "Install binaries to the framework resources directory.")
+  set(CMAKE_INSTALL_INCLUDEDIR "vtk.framework/Headers")
+  set(CMAKE_INSTALL_DATAROOTDIR "vtk.framework/Resources")
+  set(CMAKE_INSTALL_BINDIR "vtk.framework/Resources/bin")
 
   # Default options: a relatively minimal build with most of VTK disabled.  Each
   # `set` statement includes a guard to avoid overwriting user provided options
