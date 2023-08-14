@@ -79,7 +79,7 @@ endif()
 # what should change is the CMAKE_OSX_SYSROOT (to e.g., the simulator .sdk).
 set(VTK_APPLE_IOS OFF)
 string(TOLOWER "${CMAKE_SYSTEM_NAME}" _cmake_system_name_lower)
-if (_cmake_system_name_lower STREQUAL ios)
+if (_cmake_system_name_lower STREQUAL "ios")
   set(VTK_APPLE_IOS ON)
   message(STATUS "VTK is building for an iOS target.")
 endif()
