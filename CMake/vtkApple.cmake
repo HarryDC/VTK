@@ -5,8 +5,9 @@
 # provided its own internal solution.  We now require using the OBJCXX language.
 if (DEFINED VTK_REQUIRED_OBJCXX_FLAGS)
   # NOTE: do not use vtk_deprecated_setting, there is no default value.
-  message(DEPRECATION "VTK_REQUIRED_OBJCXX_FLAGS is not supported anymore.  "
-    "Please use CMake 3.16.7+ to configure VTK, and configure with "
+  message(DEPRECATION
+    "VTK_REQUIRED_OBJCXX_FLAGS is not supported anymore.  Please use CMake "
+    "3.16.7+ to configure VTK, and configure with "
     "CMAKE_OBJCXX_FLAGS=<VTK_REQUIRED_OBJCXX_FLAGS>.")
   set(CMAKE_OBJCXX_FLAGS "${VTK_REQUIRED_OBJCXX_FLAGS}")
 endif()
@@ -24,8 +25,9 @@ endif()
 # Previously `VTK_IOS_BUILD` was the VTK option to build frameworks, but is no
 # longer supported.
 if (DEFINED VTK_IOS_BUILD)
-  message(DEPRECATION "VTK_IOS_BUILD is no longer supported.  Configure VTK "
-    "with VTK_FRAMEWORK_BUILD instead.")
+  message(DEPRECATION
+    "VTK_IOS_BUILD is no longer supported.  Configure VTK with "
+    "VTK_FRAMEWORK_BUILD instead.")
   set(VTK_FRAMEWORK_BUILD "${VTK_IOS_BUILD}"
     CACHE BOOL "Install vtk.framework for apple targets." FORCE)
 endif()
@@ -36,9 +38,10 @@ endif()
 # must be set prior to any project() / enable_language() calls.  An error is
 # required here since setting the value now is too late.
 if (DEFINED IOS_SIMULATOR_ARCHITECTURES OR DEFINED IOS_DEVICE_ARCHITECTURES)
-  message(FATAL_ERROR "IOS_SIMULATOR_ARCHITECTURES and "
-    "IOS_DEVICE_ARCHITECTURES are not supported, use CMAKE_OSX_ARCHITECTURES.  "
-    "A separate build for simulator / device frameworks is now required.")
+  message(FATAL_ERROR
+    "IOS_SIMULATOR_ARCHITECTURES and IOS_DEVICE_ARCHITECTURES are not "
+    "supported, use CMAKE_OSX_ARCHITECTURES.  A separate build for simulator / "
+    "device frameworks is now required.")
 endif()
 
 # Previously IOS_DEPLOYMENT_TARGET was used for CMAKE_OSX_DEPLOYMENT_TARGET.
@@ -46,16 +49,18 @@ endif()
 # enable_language() calls.  An error is required here since setting the value
 # now is too late.
 if (DEFINED IOS_DEPLOYMENT_TARGET)
-  message(FATAL_ERROR "IOS_DEPLOYMENT_TARGET is no longer supported, use "
+  message(FATAL_ERROR
+    "IOS_DEPLOYMENT_TARGET is no longer supported, use "
     "CMAKE_OSX_DEPLOYMENT_TARGET instead.")
 endif()
 
 # Previously IOS_EMBED_BITCODE was used for this Xcode build attribute.
 # The Xcode generator settings need to be set prior to this code.
 if (DEFINED IOS_EMBED_BITCODE)
-  message(FATAL_ERROR "IOS_EMBED_BITCODE is no longer supported, configure "
-    "with CMAKE_XCODE_ATTRIBUTE_ENABLE_BITCODE instead, and make sure to use "
-    "the Xcode generator (-G Xcode).")
+  message(FATAL_ERROR
+    "IOS_EMBED_BITCODE is no longer supported, configure with "
+    "CMAKE_XCODE_ATTRIBUTE_ENABLE_BITCODE instead, and make sure to use the "
+    "Xcode generator (-G Xcode).")
 endif()
 
 # Previously vtkIOS.cmake would configure two separate projects via
@@ -63,8 +68,9 @@ endif()
 # toolchain files managed internally.  These flags were only ever set by the
 # previous iOS build and are no longer supported.
 if (DEFINED APPLE_IOS OR DEFINED TARGET_OS_IPHONE OR DEFINED TARGET_IPHONE_SIMULATOR)
-  message(FATAL_ERROR "APPLE_IOS, TARGET_OS_IPHONE, and TARGET_IPHONE_SIMULATOR"
-    " are no longer supported.  Use VTK_FRAMEWORK_BUILD=ON instead.")
+  message(FATAL_ERROR
+    "APPLE_IOS, TARGET_OS_IPHONE, and TARGET_IPHONE_SIMULATOR are no longer "
+    "supported.  Use VTK_FRAMEWORK_BUILD=ON instead.")
 endif()
 # The APPLE_IOS boolean was used to flag special case behaviors when building
 # vtk.framework, this flag is now VTK_APPLE_IOS and should only be set to ON
@@ -81,15 +87,17 @@ endif()
 # Frameworks must be static libraries.  No add_library calls have occurred yet
 # so we can correct this value now.
 if (VTK_FRAMEWORK_BUILD AND BUILD_SHARED_LIBS)
-  message(WARNING "VTK_FRAMEWORK_BUILD requires BUILD_SHARED_LIBS=OFF, overriding.")
+  message(WARNING
+    "VTK_FRAMEWORK_BUILD requires BUILD_SHARED_LIBS=OFF, overriding.")
   set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries?" FORCE)
 endif()
 
 # When this is ON the resultant framework is not usable for combining into an
 # XCFramework (only device or simulator but not both are allowed).
 if (VTK_FRAMEWORK_BUILD AND DEFINED CMAKE_IOS_INSTALL_COMBINED AND CMAKE_IOS_INSTALL_COMBINED)
-  message(WARNING "CMAKE_IOS_INSTALL_COMBINED is not supported, vtk.framework "
-    "should be compiled once for devices and separately for simulators.")
+  message(WARNING
+    "CMAKE_IOS_INSTALL_COMBINED is not supported, vtk.framework should be "
+    "compiled once for devices and separately for simulators.")
 endif()
 
 mark_as_advanced(
@@ -99,7 +107,9 @@ mark_as_advanced(
 
 if (CMAKE_OSX_DEPLOYMENT_TARGET AND
     CMAKE_OSX_DEPLOYMENT_TARGET VERSION_LESS "10.7")
-  message(FATAL_ERROR "Minimum OS X deployment target is 10.7, please update CMAKE_OSX_DEPLOYMENT_TARGET.")
+  message(FATAL_ERROR
+    "Minimum OS X deployment target is 10.7, please update "
+    "CMAKE_OSX_DEPLOYMENT_TARGET.")
 endif ()
 
 # Set defaults for the framework build.
@@ -110,16 +120,20 @@ if (VTK_FRAMEWORK_BUILD)
   # install tree will have CMAKE_INSTALL_PREFIX/lib and
   # CMAKE_INSTALL_PREFIX/vtk.framework, there is no way to prevent the `lib`
   # directory from being created.
-  set(CMAKE_INSTALL_INCLUDEDIR "vtk.framework/Headers" CACHE STRING "Install header files to the framework.")
-  set(CMAKE_INSTALL_DATAROOTDIR "vtk.framework/Resources" CACHE STRING "Install license files to the framework resources directory.")
-  set(CMAKE_INSTALL_BINDIR "vtk.framework/Resources/bin" CACHE STRING "Install binaries to the framework resources directory.")
+  set(CMAKE_INSTALL_INCLUDEDIR "vtk.framework/Headers"
+    CACHE STRING "Install header files to the framework.")
+  set(CMAKE_INSTALL_DATAROOTDIR "vtk.framework/Resources"
+    CACHE STRING "Install license files to the framework resources directory.")
+  set(CMAKE_INSTALL_BINDIR "vtk.framework/Resources/bin"
+    CACHE STRING "Install binaries to the framework resources directory.")
 
   # Default options: a relatively minimal build with most of VTK disabled.  Each
   # `set` statement includes a guard to avoid overwriting user provided options
   # on the commandline.  This file must be executed before any of the remaining
   # VTK options have been populated.
   if (NOT DEFINED VTK_ENABLE_WRAPPING)
-    set(VTK_ENABLE_WRAPPING OFF CACHE BOOL "Whether wrapping is available or not")
+    set(VTK_ENABLE_WRAPPING OFF
+      CACHE BOOL "Whether wrapping is available or not")
   endif()
 
   # Include: modules known to work in vtk.framework.
