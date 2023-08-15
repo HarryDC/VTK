@@ -40,7 +40,7 @@
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
-		71BBBB7C2A180E2800DEF64F /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
+		71BBBB7C2A180E2800DEF64F /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../../vtk_xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GLPaint-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GLPaint-Info.plist"; sourceTree = "<group>"; };
 		AF877F9317272C2F002D08B8 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		AFCEBA1E11D96215001AA22A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Images/Icon.png; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../../../xcframework/install/iPhoneOS/vtk.framework/Headers,
+					../../../../vtk_xcframework/install/iPhoneOS/vtk.framework/Headers,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "GLPaint-Info.plist";
@@ -278,7 +278,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../../../xcframework/install/iPhoneOS/vtk.framework/Headers,
+					../../../../vtk_xcframework/install/iPhoneOS/vtk.framework/Headers,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "GLPaint-Info.plist";

@@ -36,7 +36,7 @@
 		1312F95E1C650B050064AA4C /* SettingsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsTableViewController.mm; sourceTree = "<group>"; };
 		1312F9631C68EADF0064AA4C /* PlaneView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PlaneView.entitlements; sourceTree = "<group>"; };
 		135BC9A01C777D12009C8169 /* iOSapplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iOSapplication.icns; sourceTree = "<group>"; };
-		710EFBE22A1814990054F995 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
+		710EFBE22A1814990054F995 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../../vtk_xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,7 +334,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
-				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
+				HEADER_SEARCH_PATHS = ../../../../vtk_xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = PlaneView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -357,7 +357,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = W38PE5Y733;
 				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
-				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
+				HEADER_SEARCH_PATHS = ../../../../vtk_xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = PlaneView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

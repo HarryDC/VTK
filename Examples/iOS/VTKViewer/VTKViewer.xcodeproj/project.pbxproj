@@ -66,7 +66,7 @@
 		1A30DA3F1FBF7B9A00B5ACF2 /* VTKLoader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VTKLoader.mm; sourceTree = "<group>"; };
 		4304BED31FC81FE000326FC2 /* VTKViewerDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTKViewerDocument.swift; sourceTree = "<group>"; };
 		438EE6B01FD14BA4008682A3 /* ExampleDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDataManager.swift; sourceTree = "<group>"; };
-		7150DCD02A181649008B82E3 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
+		7150DCD02A181649008B82E3 /* vtk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = vtk.xcframework; path = ../../../../vtk_xcframework/install/vtk.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,7 +491,7 @@
 					"../../../xcframework/install/**",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
-				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
+				HEADER_SEARCH_PATHS = ../../../../vtk_xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = VTKViewer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -520,7 +520,7 @@
 					"../../../xcframework/install/**",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
-				HEADER_SEARCH_PATHS = ../../../xcframework/install/iPhoneOS/vtk.framework/Headers;
+				HEADER_SEARCH_PATHS = ../../../../vtk_xcframework/install/iPhoneOS/vtk.framework/Headers;
 				INFOPLIST_FILE = VTKViewer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
