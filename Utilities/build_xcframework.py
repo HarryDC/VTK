@@ -68,10 +68,10 @@ https://developer.apple.com/videos/play/wwdc2019/416
 """
 
 import argparse
-from pathlib import Path
 import shutil
 import subprocess
 import sys
+from pathlib import Path
 from typing import Iterable, Optional
 
 
@@ -205,14 +205,12 @@ class Platform:
             f"-DCMAKE_SYSTEM_NAME={self.system_name}",
         ]
         if self.generator == "Xcode":
-            ret.extend(
-                [
-                    # BUILD_LIBRARY_DISTRIBUTION=YES is required to create xcframework.
-                    "-DCMAKE_XCODE_ATTRIBUTE_BUILD_LIBRARY_FOR_DISTRIBUTION=YES",
-                    # ONLY_ACTIVE_ARCH=NO is required to build multiple architectures.
-                    "-DCMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=NO",
-                ]
-            )
+            ret += [
+                # BUILD_LIBRARY_DISTRIBUTION=YES is required to create xcframework.
+                "-DCMAKE_XCODE_ATTRIBUTE_BUILD_LIBRARY_FOR_DISTRIBUTION=YES",
+                # ONLY_ACTIVE_ARCH=NO is required to build multiple architectures.
+                "-DCMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=NO",
+            ]
         if self.deployment_target is not None:
             ret.append(f"-DCMAKE_OSX_DEPLOYMENT_TARGET={self.deployment_target}")
         if self.is_mobile:
@@ -221,14 +219,12 @@ class Platform:
             ret.append("-DCMAKE_IOS_INSTALL_COMBINED=OFF")
 
             # The following entries affect `find_package`, in particular OpenGL.
-            ret.extend(
-                [
-                    f"-DCMAKE_FIND_ROOT_PATH={self.sdk_path}",
-                    "-DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER",
-                    "-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY",
-                    "-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY",
-                ]
-            )
+            ret += [
+                f"-DCMAKE_FIND_ROOT_PATH={self.sdk_path}",
+                "-DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER",
+                "-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY",
+                "-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY",
+            ]
 
         return ret
 
@@ -345,6 +341,11 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Add -DVTK_DEBUG_MODULE=ON -DVTK_DEBUG_MODULE_ALL=ON?",
+    )
+    parser.add_argument(
         "--devcheck", action="store_true", help="Format and lint this script."
     )
     # NOTE: these must be provided last.
@@ -415,13 +416,18 @@ def main() -> None:
 
     # Short-circuit when developer check mode requested.
     if args.devcheck:
+        # python3 -m venv venv
+        # source venv/bin/activate
+        # pip install -U pip
+        # pip install black mypy flake8 flake8-import-order isort
         line_length = "88"
-        subprocess.run(
-            ["black", "--line-length", line_length, str(this_file)], check=True
+        subprocess.check_call(
+            ["black", "--line-length", line_length, str(this_file)],
         )
-        subprocess.run(["mypy", str(this_file)], check=True)
-        subprocess.run(
-            ["flake8", "--max-line-length", line_length, str(this_file)], check=True
+        subprocess.check_call(["isort", "--line-length", line_length, str(this_file)])
+        subprocess.check_call(["mypy", str(this_file)])
+        subprocess.check_call(
+            ["flake8", "--max-line-length", line_length, str(this_file)]
         )
         sys.exit(0)
 
@@ -492,31 +498,44 @@ def main() -> None:
             "-G",
             args.generator,
             # Install each to their own directory to combine together at the end.
-            f"-DCMAKE_INSTALL_PREFIX={str(install_prefix)}",
+            f"-DCMAKE_INSTALL_PREFIX:STRING={str(install_prefix)}",
             # Platform specific arguments.
             *platform.configure_args(),
             # Static libraries are required for creating an xcframework.
-            "-DBUILD_SHARED_LIBS=OFF",
+            "-DBUILD_SHARED_LIBS:BOOL=OFF",
             # VTK specific build arguments.
-            "-DBUILD_TESTING=OFF",
-            "-DVTK_FRAMEWORK_BUILD=ON",
+            # https://gitlab.kitware.com/vtk/vtk/-/blob/master/Documentation/docs/build_instructions/build_settings.md
+            "-DVTK_BUILD_TESTING:BOOL=OFF",
+            "-DVTK_BUILD_EXAMPLES:BOOL=OFF",
+            "-DVTK_ENABLE_KITS:BOOL=OFF",
+            "-DVTK_ENABLE_WRAPPING:BOOL=OFF",
+            "-DVTK_FRAMEWORK_BUILD:BOOL=ON",
+            # Do not prefer external libraries.
+            "-DVTK_USE_EXTERNAL:BOOL=OFF",
+            "-DVTK_BUILD_ALL_MODULES:STRING=NO",
+            "-DVTK_ENABLE_REMOTE_MODULES:BOOL=ON",
+            "-DVTK_FORBID_DOWNLOADS:BOOL=ON",
+            "-Werror=dev",
         ]
         # The toolchain file, if provided.
         if args.toolchain is not None:
-            configure_args.extend(["--toolchain", str(args.toolchain)])
-        configure_args.extend(
-            [
-                # Any user provided CMake configure arguments.
-                *args.extra_cmake_args,
-                # NOTE: -S {source} -B {build} must be the last two arguments.
-                # CMake project source directory.
-                "-S",
-                str(this_file_dir.parent),
-                # CMake build directory.
-                "-B",
-                str(build_dir),
+            configure_args += ["--toolchain", str(args.toolchain)]
+        if args.debug:
+            configure_args += [
+                "-DVTK_DEBUG_MODULE:BOOL=ON",
+                "-DVTK_DEBUG_MODULE_ALL:BOOL=ON",
             ]
-        )
+        configure_args += [
+            # Any user provided CMake configure arguments.
+            *args.extra_cmake_args,
+            # NOTE: -S {source} -B {build} must be the last two arguments.
+            # CMake project source directory.
+            "-S",
+            str(this_file_dir.parent),
+            # CMake build directory.
+            "-B",
+            str(build_dir),
+        ]
         # Dump to the console the full set of configure arguments before running.
         print("==> Configuring:")
         for idx, arg in enumerate(configure_args):
@@ -557,9 +576,9 @@ def main() -> None:
         if not Path(f).exists():
             print(f"SKIP: {str(f)} does not exist...")
             continue
-        xc_framework_args.extend(["-framework", f])
+        xc_framework_args += ["-framework", f]
     output_xcframework = args.install_root / "vtk.xcframework"
-    xc_framework_args.extend(["-output", str(output_xcframework)])
+    xc_framework_args += ["-output", str(output_xcframework)]
 
     print(f"==> Removing '{str(output_xcframework)}'")
     if not args.dry_run:

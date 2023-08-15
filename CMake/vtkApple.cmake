@@ -124,245 +124,201 @@ if (VTK_FRAMEWORK_BUILD)
   set(CMAKE_INSTALL_DATAROOTDIR "vtk.framework/Resources")
   set(CMAKE_INSTALL_BINDIR "vtk.framework/Resources/bin")
 
-  # Default options: a relatively minimal build with most of VTK disabled.  Each
-  # `set` statement includes a guard to avoid overwriting user provided options
-  # on the commandline.  This file must be executed before any of the remaining
-  # VTK options have been populated.
-  if (NOT DEFINED VTK_ENABLE_WRAPPING)
-    set(VTK_ENABLE_WRAPPING OFF
-      CACHE BOOL "Whether wrapping is available or not")
-  endif()
-
-  # # Include: modules known to work in vtk.framework.
-  # set(vtk_module_include_list
-  #   CommonColor
-  #   CommonComputationalGeometry
-  #   CommonExecutionModel
-  #   CommonImplicitArrays
-  #   CommonMath
-  #   CommonMisc
-  #   CommonSystem
-  #   CommonTransforms
-  #   DICOMParser # Required by IOImage
-  #   FiltersAMR
-  #   FiltersCore
-  #   FiltersExtraction  # Required by InteractionStyle
-  #   FiltersGeneral
-  #   FiltersGeometry
-  #   FiltersHybrid # Required by InteractionWidgets
-  #   FiltersModeling  # Required by InteractionWidgets
-  #   FiltersSources  # Required for RenderingVolumeOpenGL2
-  #   FiltersStatistics
-  #   FiltersTexture # Required by InteractionWidgets
-  #   FiltersHyperTree # Required by RenderingOpenGL2
-  #   FiltersVerdict
-  #   ImagingColor
-  #   ImagingCore
-  #   ImagingFourier
-  #   ImagingGeneral
-  #   ImagingHybrid
-  #   ImagingMath
-  #   ImagingMorphological
-  #   ImagingOpenGL2
-  #   ImagingSources
-  #   ImagingStatistics
-  #   ImagingStencil
-  #   InteractionImage
-  #   InteractionStyle
-  #   InteractionWidgets
-  #   IOCore
-  #   IOImage  # Required by RenderingOpenGL2
-  #   IOGeometry
-  #   IOLegacy  # Required by ParallelCore
-  #   IOXML  # Required by ParallelCore
-  #   IOXMLParser
-  #   ParallelDIY  # Required by FiltersExtraction
-  #   ParallelCore  # Required by ParallelDIY
-  #   RenderingAnnotation # Required by InteractionWidgets
-  #   RenderingContext2D
-  #   RenderingCore
-  #   RenderingFreeType
-  #   RenderingImage
-  #   RenderingOpenGL2
-  #   RenderingUI
-  #   RenderingVolume
-  #   RenderingVolumeAMR
-  #   RenderingVolumeOpenGL2)
-  # foreach (mod IN LISTS vtk_module_include_list)
-  #   set(var "VTK_MODULE_ENABLE_VTK_${mod}")
-  #   if (NOT DEFINED ${var})
-  #     set(${var} "YES" CACHE STRING "Enable the VTK::${mod} module.")
-  #   endif()
-  #   unset(var)
-  # endforeach()
-
-  # # Exclude: modules that either have problems or too many dependencies.
-  # set(vtk_module_exclude_list
-  #   AcceleratorsVTKmCore
-  #   AcceleratorsVTKmDataModel
-  #   AcceleratorsVTKmFilters
-  #   ChartsCore
-  #   CommonArchive
-  #   CommonCore
-  #   CommonDataModel
-  #   DomainsChemistry
-  #   DomainsChemistryOpenGL2
-  #   DomainsMicroscopy
-  #   DomainsParallelChemistry
-  #   FiltersCellGrid
-  #   FiltersDSP
-  #   FiltersFlowPaths
-  #   FiltersGeneric
-  #   FiltersGeometryPreview
-  #   FiltersImaging
-  #   FiltersOpenTURNS
-  #   FiltersParallel
-  #   FiltersParallelDIY2
-  #   FiltersParallelFlowPaths
-  #   FiltersParallelGeometry
-  #   FiltersParallelImaging
-  #   FiltersParallelMPI
-  #   FiltersParallelStatistics
-  #   FiltersParallelVerdict
-  #   FiltersPoints
-  #   FiltersProgrammable
-  #   FiltersReduction
-  #   FiltersReebGraph
-  #   FiltersSMP
-  #   FiltersSelection
-  #   FiltersTopology
-  #   GUISupportQt
-  #   GUISupportQtQuick
-  #   GUISupportQtSQL
-  #   GeovisCore
-  #   GeovisGDAL
-  #   InfovisBoost
-  #   InfovisBoostGraphAlgorithms
-  #   InfovisCore
-  #   InfovisLayout
-  #   # Most IO modules will need extra attention, disable all.
-  #   IOADIOS2
-  #   IOAMR
-  #   IOAsynchronous
-  #   IOCGNSReader
-  #   IOCONVERGECFD
-  #   IOCellGrid
-  #   IOCesium3DTiles
-  #   IOChemistry
-  #   IOCityGML
-  #   IOEnSight
-  #   IOExodus
-  #   IOExport
-  #   IOExportGL2PS
-  #   IOExportPDF
-  #   IOFFMPEG
-  #   IOFides
-  #   IOGDAL
-  #   IOGeoJSON
-  #   IOH5Rage
-  #   IOH5part
-  #   IOHDF
-  #   IOIOSS
-  #   IOImport
-  #   IOInfovis
-  #   IOLAS
-  #   IOLSDyna
-  #   IOMINC
-  #   IOMPIImage
-  #   IOMPIParallel
-  #   IOMotionFX
-  #   IOMovie
-  #   IOMySQL
-  #   IONetCDF
-  #   IOOCCT
-  #   IOODBC
-  #   IOOMF
-  #   IOOggTheora
-  #   IOOpenVDB
-  #   IOPDAL
-  #   IOPIO
-  #   IOPLY
-  #   IOParallel
-  #   IOParallelExodus
-  #   IOParallelLSDyna
-  #   IOParallelNetCDF
-  #   IOParallelXML
-  #   IOParallelXdmf3
-  #   IOPostgreSQL
-  #   IOSQL
-  #   IOSegY
-  #   IOTRUCHAS
-  #   IOTecplotTable
-  #   IOVPIC
-  #   IOVeraOut
-  #   IOVideo
-  #   IOXdmf2
-  #   IOXdmf3
-  #   ParallelMPI
-  #   PythonInterpreter
-  #   RenderingCellGrid  # Does not support iOS
-  #   RenderingContextOpenGL2  # Does not support iOS
-  #   RenderingExternal
-  #   RenderingFFMPEGOpenGL2
-  #   RenderingFreeTypeFontConfig
-  #   RenderingLICOpenGL2
-  #   RenderingLOD
-  #   RenderingLabel
-  #   RenderingMatplotlib
-  #   RenderingOpenVR
-  #   RenderingOpenXR
-  #   RenderingParallel
-  #   RenderingParallelLIC
-  #   RenderingQt
-  #   RenderingRayTracing
-  #   RenderingSceneGraph
-  #   RenderingVR  # Does not support iOS.
-  #   RenderingVtkJS
-  #   RenderingZSpace
-  #   TestingCore
-  #   TestingDataModel
-  #   TestingGenericBridge
-  #   TestingIOSQL
-  #   TestingRendering
-  #   UtilitiesBenchmarks
-  #   ViewsContext2D
-  #   ViewsCore
-  #   ViewsInfovis
-  #   ViewsQt
-  #   WebCore
-  #   WebGLExporter
-  #   WrappingPythonCore
-  #   WrappingTools)
-  # foreach (mod IN LISTS vtk_module_exclude_list)
-  #   set(var "VTK_MODULE_ENABLE_VTK_${mod}")
-  #   if (NOT DEFINED ${var})
-  #     set(${var} "NO" CACHE STRING "Enable the VTK::${mod} module.")
-  #   endif()
-  #   unset(var)
-  # endforeach()
-
-  # # Developer safeguard: if you have an entry in the include list, and also put
-  # # it in the exclude list, it will be *included* since that cache entry gets
-  # # set first.  To aid development, modules found in both result in an error.
-  # set(invalid_list)
-  # foreach (include_mod IN LISTS vtk_module_include_list)
-  #   foreach (exclude_mod IN LISTS vtk_module_exclude_list)
-  #     if ("${include_mod}" STREQUAL "${exclude_mod}")
-  #       list(APPEND invalid_list "${include_mod}")
-  #     endif()
-  #   endforeach()
-  # endforeach()
-
-  # list(LENGTH invalid_list invalid_list_length)
-  # if (invalid_list_length GREATER 0)
-  #   message(FATAL_ERROR
-  #     "vtkApple.cmake: the following module(s) appear in both "
-  #     "`vtk_module_include_list` and `vtk_module_exclude_list`, duplicates are "
-  #     "not allowed: ${invalid_list}")
-  # endif()
-
-  # unset(vtk_module_include_list)
-  # unset(vtk_module_exclude_list)
-  # unset(invalid_list)
-  # unset(invalid_list_length)
+  # The set of modules we want to build by default for the vtk.xcframework.
+  # This list was originally curated for the immediate needs: RenderingOpenGL2
+  # and some Image loading / exporting.
+  #
+  # Everything else was determined by manually curating the final list of
+  # dependencies (and more importantly reducing the number of things built for
+  # a vtk.xcframework, since most of the modules are not applicable / useful).
+  #
+  # The two lists _vtk_framework_build_{requested,rejected}_modules are set here
+  # in this file since the lists are quite long.  These lists are used in the
+  # root CMakeLists.txt of VTK.
+  set(_vtk_framework_build_requested_modules
+    VTK::InteractionImage
+    VTK::InteractionStyle
+    VTK::InteractionWidgets
+    VTK::IOExport
+    VTK::IOImage
+    VTK::RenderingOpenGL2
+    # Build third party libraries we want into it directly.
+    VTK::diy2
+    VTK::doubleconversion
+    VTK::eigen
+    VTK::expat
+    VTK::exprtk
+    VTK::fast_float
+    VTK::fmt
+    VTK::freetype
+    VTK::glew
+    VTK::jpeg
+    VTK::kissfft
+    VTK::lz4
+    VTK::lzma
+    VTK::png
+    VTK::pugixml
+    VTK::tiff
+    VTK::utf8
+    VTK::verdict
+    VTK::zlib)
+  set(_vtk_framework_build_rejected_modules
+    # Prevent external libraries we do not want from being built.
+    VTK::cgns
+    VTK::cli11
+    VTK::exodusII
+    VTK::fides
+    VTK::gl2ps
+    VTK::h5part
+    VTK::hdf5
+    VTK::ioss
+    VTK::jsoncpp
+    VTK::libharu
+    VTK::libproj
+    VTK::libxml2
+    VTK::loguru
+    VTK::netcdf
+    VTK::nlohmannjson
+    VTK::ogg
+    VTK::pegtl
+    VTK::sqlite
+    VTK::theora
+    VTK::vpic
+    VTK::xdmf2
+    VTK::xdmf3
+    VTK::zfp
+    # Disable VTK modules that either do not work, or bring in too many dependencies.
+    VTK::AcceleratorsVTKmCore
+    VTK::AcceleratorsVTKmDataModel
+    VTK::AcceleratorsVTKmFilters
+    VTK::ChartsCore
+    VTK::CommonArchive
+    VTK::DomainsChemistry
+    VTK::DomainsChemistryOpenGL2
+    VTK::DomainsMicroscopy
+    VTK::DomainsParallelChemistry
+    VTK::FiltersCellGrid
+    VTK::FiltersDSP
+    VTK::FiltersFlowPaths
+    VTK::FiltersGeneric
+    VTK::FiltersGeometryPreview
+    VTK::FiltersImaging
+    VTK::FiltersOpenTURNS
+    VTK::FiltersParallel
+    VTK::FiltersParallelDIY2
+    VTK::FiltersParallelFlowPaths
+    VTK::FiltersParallelGeometry
+    VTK::FiltersParallelImaging
+    VTK::FiltersParallelMPI
+    VTK::FiltersParallelStatistics
+    VTK::FiltersParallelVerdict
+    VTK::FiltersPoints
+    VTK::FiltersProgrammable
+    VTK::FiltersReduction
+    VTK::FiltersReebGraph
+    VTK::FiltersSMP
+    VTK::FiltersSelection
+    VTK::FiltersTopology
+    VTK::GUISupportQt
+    VTK::GUISupportQtQuick
+    VTK::GUISupportQtSQL
+    VTK::GeovisCore
+    VTK::GeovisGDAL
+    VTK::InfovisBoost
+    VTK::InfovisBoostGraphAlgorithms
+    VTK::InfovisCore
+    VTK::InfovisLayout
+    # Most IO modules will need extra attention, disable all.
+    VTK::IOADIOS2
+    VTK::IOAMR
+    VTK::IOAsynchronous
+    VTK::IOCGNSReader
+    VTK::IOCONVERGECFD
+    VTK::IOCellGrid
+    VTK::IOCesium3DTiles
+    VTK::IOChemistry
+    VTK::IOCityGML
+    VTK::IOEnSight
+    VTK::IOExodus
+    VTK::IOExport
+    VTK::IOExportGL2PS
+    VTK::IOExportPDF
+    VTK::IOFFMPEG
+    VTK::IOFides
+    VTK::IOGDAL
+    VTK::IOGeoJSON
+    VTK::IOH5Rage
+    VTK::IOH5part
+    VTK::IOHDF
+    VTK::IOIOSS
+    VTK::IOImport
+    VTK::IOInfovis
+    VTK::IOLAS
+    VTK::IOLSDyna
+    VTK::IOMINC
+    VTK::IOMPIImage
+    VTK::IOMPIParallel
+    VTK::IOMotionFX
+    VTK::IOMovie
+    VTK::IOMySQL
+    VTK::IONetCDF
+    VTK::IOOCCT
+    VTK::IOODBC
+    VTK::IOOMF
+    VTK::IOOggTheora
+    VTK::IOOpenVDB
+    VTK::IOPDAL
+    VTK::IOPIO
+    VTK::IOPLY
+    VTK::IOParallel
+    VTK::IOParallelExodus
+    VTK::IOParallelLSDyna
+    VTK::IOParallelNetCDF
+    VTK::IOParallelXML
+    VTK::IOParallelXdmf3
+    VTK::IOPostgreSQL
+    VTK::IOSQL
+    VTK::IOSegY
+    VTK::IOTRUCHAS
+    VTK::IOTecplotTable
+    VTK::IOVPIC
+    VTK::IOVeraOut
+    VTK::IOVideo
+    VTK::IOXdmf2
+    VTK::IOXdmf3
+    VTK::ParallelMPI
+    VTK::PythonInterpreter
+    VTK::RenderingCellGrid  # Does not support iOS.
+    VTK::RenderingContextOpenGL2  # Does not support iOS.
+    VTK::RenderingExternal
+    VTK::RenderingFFMPEGOpenGL2
+    VTK::RenderingFreeTypeFontConfig
+    VTK::RenderingLICOpenGL2
+    VTK::RenderingLOD
+    VTK::RenderingLabel
+    VTK::RenderingMatplotlib
+    VTK::RenderingOpenVR
+    VTK::RenderingOpenXR
+    VTK::RenderingParallel
+    VTK::RenderingParallelLIC
+    VTK::RenderingQt
+    VTK::RenderingRayTracing
+    VTK::RenderingSceneGraph
+    VTK::RenderingVR  # Does not support iOS.
+    VTK::RenderingVtkJS
+    VTK::RenderingZSpace
+    VTK::TestingCore
+    VTK::TestingDataModel
+    VTK::TestingGenericBridge
+    VTK::TestingIOSQL
+    VTK::TestingRendering
+    VTK::UtilitiesBenchmarks
+    VTK::ViewsContext2D
+    VTK::ViewsCore
+    VTK::ViewsInfovis
+    VTK::ViewsQt
+    VTK::WebCore
+    VTK::WebGLExporter
+    VTK::WrappingPythonCore
+    VTK::WrappingTools)
 endif()

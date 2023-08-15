@@ -409,13 +409,12 @@ if (VTK_BUILD_COMPILE_TOOLS_ONLY)
   set(vtk_kit_files)
 endif ()
 
-# TODO: add another file here to include for VTK_FRAMEWORK_BUILD modules to set
-# both vtk_requested_modules and vtk_rejected_modules.
+# Use the module lists populated in CMake/vtkApple.cmake.
 if (VTK_FRAMEWORK_BUILD)
-  set(vtk_requested_modules
-    VTK::RenderingOpenGL2)
-  set(vtk_rejected_modules
-    VTK::h5part)
+  set(vtk_requested_modules "${_vtk_framework_build_requested_modules}")
+  set(vtk_rejected_modules "${_vtk_framework_build_rejected_modules}")
+  unset(_vtk_framework_build_requested_modules)
+  unset(_vtk_framework_build_rejected_modules)
 endif()
 
 cmake_dependent_option(VTK_INSTALL_SDK "Install SDK components" ON
