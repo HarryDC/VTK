@@ -348,6 +348,15 @@ def main() -> None:
     parser.add_argument(
         "--devcheck", action="store_true", help="Format and lint this script."
     )
+
+    parser.add_argument(
+    	"--build-tool-options",
+    	dest="build_tool_options",
+    	type=str,
+    	default=None,
+    	help="Options to be passed through to the build tool. Use --build-tool-options=\"-<option1> -<option2>\""
+    )
+
     # NOTE: these must be provided last.
     parser.add_argument(
         "extra_cmake_args",
@@ -357,6 +366,7 @@ def main() -> None:
             "No validation of these flags is performed."
         ),
     )
+    
 
     args = parser.parse_args()
 
@@ -557,6 +567,9 @@ def main() -> None:
             "--target",
             "install",
         ]
+        if args.build_tool_options is not None:
+        	build_args += ["--", args.build_tool_options]
+        
         all_build_args.append(build_args)
 
     # Now that each platform has successfully configured, build and install.

@@ -6,6 +6,7 @@
 #import "vtkIOSRenderWindowInteractor.h"
 
 #include "vtkActor.h"
+#include "vtkAutoInit.h"
 #include "vtkCamera.h"
 #include "vtkCommand.h"
 #include "vtkConeSource.h"
@@ -19,6 +20,8 @@
 #include "vtkPolyDataMapper.h"
 #include "vtkRenderer.h"
 #include "vtkSphereSource.h"
+
+VTK_MODULE_INIT(vtkRenderingOpenGL2);
 
 @interface MyGLKViewController ()
 {
@@ -126,7 +129,7 @@
 
   [EAGLContext setCurrentContext:self.context];
   [self resizeView];
-  [self getVTKRenderWindow] -> Render();
+  //[self getVTKRenderWindow] -> Render();
 }
 
 - (void)dealloc

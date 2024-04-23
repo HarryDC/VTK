@@ -16,11 +16,14 @@
 #import "VTKView.h"
 
 #include "vtkActor.h"
+#include "vtkAutoInit.h"
 #include "vtkCubeSource.h"
 #include "vtkPolyDataMapper.h"
 #include "vtkRenderWindow.h"
 #include "vtkRenderer.h"
 #include "vtkSmartPointer.h"
+
+VTK_MODULE_INIT(vtkRenderingOpenGL2);
 
 @interface VTKViewController ()
 
@@ -127,6 +130,8 @@
 
 - (IBAction)onAddDataButtonPressed:(id)sender
 {
+  // Put Document Viewer into the VTKExamples Directory
+  // Bunny object not working
   UIDocumentPickerViewController* documentPicker =
     [[UIDocumentPickerViewController alloc] initWithDocumentTypes:[self supportedFileTypes]
                                                            inMode:UIDocumentPickerModeImport];

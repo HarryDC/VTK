@@ -141,6 +141,7 @@ if (VTK_FRAMEWORK_BUILD)
     VTK::InteractionWidgets
     VTK::IOExport
     VTK::IOImage
+    VTK::IOGeometry
     VTK::RenderingOpenGL2
     # Build third party libraries we want into it directly.
     VTK::diy2
@@ -156,6 +157,7 @@ if (VTK_FRAMEWORK_BUILD)
     VTK::kissfft
     VTK::lz4
     VTK::lzma
+    VTK::nlohmannjson
     VTK::png
     VTK::pugixml
     VTK::tiff
@@ -178,7 +180,6 @@ if (VTK_FRAMEWORK_BUILD)
     VTK::libxml2
     VTK::loguru
     VTK::netcdf
-    VTK::nlohmannjson
     VTK::ogg
     VTK::pegtl
     VTK::sqlite

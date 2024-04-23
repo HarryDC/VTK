@@ -23,6 +23,7 @@
 #include "vtkSmartPointer.h"
 
 #include "vtkActor.h"
+#include "vtkAutoInit.h"
 #include "vtkActor2D.h"
 #include "vtkCamera.h"
 #include "vtkCommand.h"
@@ -36,6 +37,9 @@
 #include "vtkTextProperty.h"
 
 #include <deque>
+
+#undef EXAMPLE_USE_TEXTURES
+VTK_MODULE_INIT(vtkRenderingOpenGL2);
 
 @interface MyGLKViewController ()
 {
@@ -141,15 +145,15 @@
   std::vector<vtkSmartPointer<vtkActor>> actors;
 
   // No text mappers/actors in VTK GL2 yet
-#if 0
-  //std::vector<vtkSmartPointer<vtkTextMapper> > textmappers;
-  //std::vector<vtkSmartPointer<vtkActor2D> > textactors;
+#ifdef EXAMPLE_USE_TEXTURES
+  std::vector<vtkSmartPointer<vtkTextMapper> > textmappers;
+  std::vector<vtkSmartPointer<vtkActor2D> > textactors;
 
   // Create one text property for all
-  //vtkSmartPointer<vtkTextProperty> textProperty =
-  //vtkSmartPointer<vtkTextProperty>::New();
-  //textProperty->SetFontSize(10);
-  //textProperty->SetJustificationToCentered();
+  vtkSmartPointer<vtkTextProperty> textProperty =
+  vtkSmartPointer<vtkTextProperty>::New();
+  textProperty->SetFontSize(10);
+  textProperty->SetJustificationToCentered();
 #endif
 
   // Create a parametric function source, renderer, mapper, and actor
@@ -169,7 +173,7 @@
     actors[i]->SetMapper(mappers[i]);
 
     // No text mappers/actors in VTK GL2 yet
-#if 0
+#ifdef EXAMPLE_USE_TEXTURES
     textmappers.push_back(vtkSmartPointer<vtkTextMapper>::New());
     textmappers[i]->SetInput(parametricObjects[i]->GetClassName());
     textmappers[i]->SetTextProperty(textProperty);
@@ -217,7 +221,9 @@
         continue;
       }
       renderers[index]->AddActor(actors[index]);
-      // renderers[index]->AddActor(textactors[index]);
+#ifdef EXAMPLE_USE_TEXTURES
+      renderers[index]->AddActor(textactors[index]);
+#endif
       renderers[index]->SetBackground(.2, .3, .4);
       renderers[index]->ResetCamera();
       renderers[index]->GetActiveCamera()->Azimuth(30);
@@ -259,7 +265,6 @@
 
   [EAGLContext setCurrentContext:self.context];
   [self resizeView];
-  [self getVTKRenderWindow] -> Render();
 }
 
 - (void)dealloc

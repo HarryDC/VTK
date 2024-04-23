@@ -24,7 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13328B8519C77938006A473C /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		13B73C8919DEE9B800A42447 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		13B73C8A19DEE9B800A42447 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Classes/AppDelegate.mm; sourceTree = "<group>"; };
 		13B73C8B19DEE9B800A42447 /* MyGLKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyGLKViewController.h; path = Classes/MyGLKViewController.h; sourceTree = "<group>"; };
@@ -35,7 +34,6 @@
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Surfaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Surfaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		225248061A2E3FDB009B03BD /* vtk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vtk.framework; path = /usr/local/frameworks/vtk.framework; sourceTree = SOURCE_ROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -110,8 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				715EE0522A18110D0082D50A /* vtk.xcframework */,
-				225248061A2E3FDB009B03BD /* vtk.framework */,
-				13328B8519C77938006A473C /* libstdc++.6.0.9.dylib */,
 				AF877F9317272C2F002D08B8 /* GLKit.framework */,
 				1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */,
 				2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */,

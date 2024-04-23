@@ -24,8 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13328B8319C77700006A473C /* vtk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vtk.framework; path = /usr/local/frameworks/vtk.framework; sourceTree = "<group>"; };
-		13328B8519C77938006A473C /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		13B73C8919DEE9B800A42447 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		13B73C8A19DEE9B800A42447 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Classes/AppDelegate.mm; sourceTree = "<group>"; };
 		13B73C8B19DEE9B800A42447 /* MyGLKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyGLKViewController.h; path = Classes/MyGLKViewController.h; sourceTree = "<group>"; };
@@ -110,8 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				71BBBB7C2A180E2800DEF64F /* vtk.xcframework */,
-				13328B8519C77938006A473C /* libstdc++.6.0.9.dylib */,
-				13328B8319C77700006A473C /* vtk.framework */,
 				AF877F9317272C2F002D08B8 /* GLKit.framework */,
 				1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */,
 				2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */,
