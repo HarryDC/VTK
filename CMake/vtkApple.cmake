@@ -199,7 +199,6 @@ if (VTK_FRAMEWORK_BUILD)
     VTK::DomainsMicroscopy
     VTK::DomainsParallelChemistry
     VTK::FiltersCellGrid
-    VTK::FiltersDSP
     VTK::FiltersFlowPaths
     VTK::FiltersGeneric
     VTK::FiltersGeometryPreview
@@ -307,7 +306,7 @@ if (VTK_FRAMEWORK_BUILD)
     VTK::RenderingSceneGraph
     VTK::RenderingVR  # Does not support iOS.
     VTK::RenderingVtkJS
-    VTK::RenderingZSpace
+    VTK::RenderingWebGPU
     VTK::TestingCore
     VTK::TestingDataModel
     VTK::TestingGenericBridge
