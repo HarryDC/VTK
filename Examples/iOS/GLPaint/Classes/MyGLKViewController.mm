@@ -23,6 +23,8 @@
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 
+#import <Foundation/Foundation.h>
+
 @interface MyGLKViewController ()
 {
 }
@@ -63,12 +65,13 @@ VTK_MODULE_INIT(vtkRenderingOpenGL2);
 - (void)setupPipeline
 {
   vtkIOSRenderWindow* renWin = vtkIOSRenderWindow::New();
-  // renWin->DebugOn();
+  renWin->DebugOn();
   [self setVTKRenderWindow:renWin];
 
   vtkNew<vtkRenderer> renderer;
   renWin->AddRenderer(renderer.Get());
-
+    
+  
   // this example uses VTK's built in interaction but you could choose
   // to use your own instead.
   vtkRenderWindowInteractor* iren = vtkRenderWindowInteractor::New();
@@ -129,6 +132,7 @@ VTK_MODULE_INIT(vtkRenderingOpenGL2);
 
   [EAGLContext setCurrentContext:self.context];
   [self resizeView];
+  NSLog([NSString stringWithUTF8String: [self getVTKRenderWindow]->ReportCapabilities()]);
   //[self getVTKRenderWindow] -> Render();
 }
 

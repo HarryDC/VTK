@@ -62,9 +62,9 @@ bool vtkGLSLModLight::ReplaceShaderValues(vtkOpenGLRenderer* renderer, std::stri
   vtkAbstractMapper* vtkNotUsed(mapper), vtkActor* actor)
 {
   vtkShaderProgram::Substitute(
-    vertexShader, "//VTK::PositionVC::Dec", "smooth out vec4 vertexPositionVCVS;");
+    vertexShader, "//VTK::PositionVC::Dec", "out vec4 vertexPositionVCVS;");
   vtkShaderProgram::Substitute(
-    fragmentShader, "//VTK::PositionVC::Dec", "smooth in vec4 vertexPositionVCVS;");
+    fragmentShader, "//VTK::PositionVC::Dec", "in vec4 vertexPositionVCVS;");
   vtkShaderProgram::Substitute(
     fragmentShader, "//VTK::PositionVC::Impl", "vec4 vertexVC = vertexPositionVCVS;");
 
